@@ -53,7 +53,7 @@ catkin_make install
     roslaunch homework2 figure_eight.launch
     ```
 
-4. The 2R arm code runs two nodes, `arm_traj` (which commands the arm trajectory) and `arm_marker` (which draws markers at the end-effector of the arm). To run the 2R arm code, run:
+4. The 2R arm code runs two main nodes, `arm_traj` (which commands the arm trajectory) and `arm_marker` (which draws markers at the end-effector of the arm). To run the 2R arm code, run:
 ```Shell
 roslaunch homework2 arm_traj.launch
 ```
