@@ -6,7 +6,7 @@ Author: Christopher Tsai
 
 This package contains nodes that accomplish two tasks:
 
-1. Cause a turtlebot to follow a configurable figure 8 trajectory. One has the option to run this code in real-life or in a Gazebo simulation. Either way it is accompanies by an RViz visualization.
+1. Cause a turtlebot to follow a configurable figure 8 trajectory. One has the option to run this code in real-life or in a Gazebo simulation. Either way it is accompanied by an RViz visualization.
 
 2. Visualize a 2R arm that follows a trajectory where its y-position remains constant. 
 
