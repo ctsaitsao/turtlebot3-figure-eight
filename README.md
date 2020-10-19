@@ -12,9 +12,9 @@ This package contains nodes that accomplish two tasks:
 
 ## Demos:
 
-Turtlebot RVIz: https://youtu.be/BLI5nBEQBdw
-Turtlebot IRL: https://youtu.be/CagvXUCvS04
-Arm RViz: https://youtu.be/47MknIazwUA
+Turtlebot RVIz: https://youtu.be/BLI5nBEQBdw  
+Turtlebot IRL: https://youtu.be/CagvXUCvS04  
+Arm RViz: https://youtu.be/47MknIazwUA  
 
 ## Usage Instructions:
 
