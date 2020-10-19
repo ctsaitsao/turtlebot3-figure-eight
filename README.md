@@ -71,7 +71,7 @@ roslaunch homework2 arm_traj.launch
     ```Shell
     roslaunch homework2 view_arm.launch launch_gui:=True
     ```
-      This launch file is included in `arm_traj.launch`.
+    This launch file is included in `arm_traj.launch`.
 
 ## Calculations:
 
