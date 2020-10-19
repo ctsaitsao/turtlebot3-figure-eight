@@ -16,9 +16,9 @@ Turtlebot RVIz: https://youtu.be/BLI5nBEQBdw
 Turtlebot IRL: https://youtu.be/CagvXUCvS04
 Arm RViz: https://youtu.be/47MknIazwUA
 
-## Usage Instructions and Configuration Options:
+## Usage Instructions:
 
-1. Create a new workspace and clone the demonstration code.
+1. Create a new workspace and clone this repositiory.
 ```Shell
 # Create a new workspace
 mkdir -p ws/src
