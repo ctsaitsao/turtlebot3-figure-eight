@@ -1,0 +1,21 @@
+<launch>
+
+    <arg name="launch_rqt_plot" default="False" doc="Option to launch rqt_plot to show turtle coords over time."/>
+    <arg name="launch_gazebo" default="False" doc="Option to launch turtlebot in Gazebo instead of real life."/>
+    <arg name="launch_rviz" default="True" doc="Option to launch RViz."/>
+
+    <include file="$(find turtlebot3_bringup)/launch/turtlebot3_remote.launch" unless="$(arg launch_gazebo)">
+        <arg name="model" value="burger"/>
+    </include>
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_empty_world.launch" if="$(arg launch_gazebo)"/>
+
+    <rosparam command="load" file="$(find homework2)/config/trajectory.yaml"/>
+
+    <node name="trajectory" type="trajectory" pkg="homework2">
+        <param name="~pub_freq" value="50"/>
+    </node>
+    <node name="rqt_plot" type="rqt_plot" pkg="rqt_plot" args="/odom/pose/pose/position/x:y" if="$(arg launch_rqt_plot)"/>
+    <node name="rviz" type="rviz" pkg="rviz" args="-d $(find homework2)/config/turtle_view.rviz" if="$(arg launch_rviz)"/>
+    <node name="robot_state_publisher" type="robot_state_publisher" pkg="robot_state_publisher" if="$(arg launch_gazebo)"/>
+
+</launch>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="arm">
+
+    <xacro:property name="yaml_file" value="$(find homework2)/config/arm.yaml" />
+    <xacro:property name="param" value="${load_yaml(yaml_file)}" />
+    <xacro:property name="L1" value="${param['L1']}" />
+    <xacro:property name="L2" value="${param['L2']}" />
+    <xacro:property name="r" value="${param['r']}" />
+
+    <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+    </material>
+
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+
+    <link name="base_link"/>
+
+    <joint name="lower_joint" type="continuous">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="lower_link"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="lower_link">
+        <visual>
+            <origin xyz="${L1/2} 0 0" rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <cylinder radius="${r}" length="${L1}"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="upper_joint" type="continuous">
+        <origin xyz="${L1} 0 0" rpy="0 0 0"/>
+        <parent link="lower_link"/>
+        <child link="upper_link"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="upper_link">
+        <visual>
+            <origin xyz="${L2/2} 0 0" rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <cylinder radius="${r}" length="${L2}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <joint name="end_effector_joint" type="fixed">
+        <origin xyz="${L2} 0 0" rpy="0 0 0"/>
+        <parent link="upper_link"/>
+        <child link="end_effector"/>
+    </joint>
+
+    <link name="end_effector"/>
+
+ </robot>

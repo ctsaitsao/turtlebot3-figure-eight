@@ -1,0 +1,4 @@
+L1: 2       # units: m
+L2: 1       # units: m
+r: 0.1      # units: m
+period: 10  # units: s

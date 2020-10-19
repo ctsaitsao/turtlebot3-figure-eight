@@ -1,0 +1,14 @@
+<launch>
+
+    <include file="$(find homework2)/launch/view_arm.launch"/>
+
+    <arg name="display_markers" default="True" doc="Option to display trajectory markers in RViz."/>
+
+    <node name="arm_traj" type="arm_traj" pkg="homework2">
+        <param name="~pub_freq" value="1000"/>
+    </node>
+    <node name="arm_marker" type="arm_marker" pkg="homework2" if="$(arg display_markers)">
+            <param name="~pub_freq" value="10"/>
+    </node>
+
+</launch>

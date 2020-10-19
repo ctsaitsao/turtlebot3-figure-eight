@@ -1,0 +1,145 @@
+#!/usr/bin/env python
+"""
+Node makes turtlebot follow a figure eight trajectory.
+
+PUBLISHERS:
+    cmd_vel (geometry_msgs/Twist): commanded twist that moves the turtlebot
+    path (nav_msgs/Path): draws a continuous line in RViz
+
+SERVICES:
+    pause (std_srvs/Empty): pauses robot motion
+    resume (std_srvs/Empty): resumes robot motion
+
+PARAMETERS:
+    width: width of the figure eight
+    height: height of the figure eight
+    period: amount of time it takes to complete the figure eight
+    ~pub_freq: frequency at which to publish the messages
+"""
+
+import rospy
+from geometry_msgs.msg import Twist, Point, Quaternion, Pose, PoseStamped, \
+                                TransformStamped
+from nav_msgs.msg import Path
+from std_srvs.srv import Empty, EmptyResponse
+import tf2_ros
+from math import sin, cos, pi, atan2
+from enum import Enum, auto
+from homework2.utils import FigureEight, v, w
+from tf.transformations import quaternion_about_axis
+
+
+class State(Enum):
+    """ The state of the turtle control loop.
+        These are different modes that the controller can be in.
+    """
+    MOVING = auto()
+    STOPPED = auto()
+
+
+class Trajectory:
+    """ Causes turtle1 to follow a figure eight trajectory. """
+    def __init__(self):
+        self.__cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+        self.__path_pub = rospy.Publisher('path', Path, queue_size=10)
+        self.__pause = rospy.Service('pause', Empty, self.pause_callback)
+        self.__resume = rospy.Service('resume', Empty, self.resume_callback)
+        self.__broadcaster = tf2_ros.StaticTransformBroadcaster()
+        self.__width = rospy.get_param('width')
+        self.__height = rospy.get_param('height')
+        self.__period = rospy.get_param('period')
+        self.__pub_freq = rospy.get_param('~pub_freq')
+        self.__rate = rospy.Rate(self.__pub_freq)
+        self.__t = 0
+        self.__shape = FigureEight(self.__width, self.__height, self.__period)
+        self.__state = State.STOPPED
+
+    def pause_callback(self, req):
+        """ Callback function for the pause service. Pauses robot motion.
+            Args:
+                req (EmptyRequest): empty request
+
+            Returns:
+                - (EmptyRespose): empty response
+        """
+        self.__state = State.STOPPED
+        return EmptyResponse()
+
+    def resume_callback(self, req):
+        """ Callback function for the resume service. Resumes robot motion.
+            Args:
+                req (EmptyRequest): empty request
+
+            Returns:
+                - (EmptyRespose): empty response
+        """
+        self.__state = State.MOVING
+        return EmptyResponse()
+
+    def loop(self):
+        """ Main loop for feeding the robot a commanded velocity. """
+        self.__shape.update_feedforward_traj(self.__t)  # to start at t = 0
+
+        u = Twist()
+        path = Path()
+        world_odom_tf = TransformStamped()
+
+        world_odom_tf.header.stamp = rospy.Time.now()
+        world_odom_tf.header.frame_id = 'world'
+        world_odom_tf.child_frame_id = 'odom'
+        world_odom_tf.transform.translation.x = 0
+        world_odom_tf.transform.translation.y = 0
+        world_odom_tf.transform.translation.z = 0
+        quat = quaternion_about_axis(atan2(self.__shape.ydot,
+                                           self.__shape.xdot),
+                                     [0, 0, 1])
+        world_odom_tf.transform.rotation = Quaternion(*quat)
+
+        self.__broadcaster.sendTransform(world_odom_tf)
+
+        self.__state = State.MOVING
+
+        while not rospy.is_shutdown():
+            if self.__state == State.MOVING:
+                self.__shape.update_feedforward_traj(self.__t)
+
+                if self.__t < self.__period:
+                    path.header.stamp = rospy.Time.now()
+                    path.header.frame_id = 'world'
+                    path.poses.append(
+                        PoseStamped(header=path.header,
+                                    pose=Pose(position=Point(self.__shape.x,
+                                                             self.__shape.y,
+                                                             0),
+                                              orientation=Quaternion())))
+
+                    self.__path_pub.publish(path)
+
+                v_ = v(self.__shape.xdot, self.__shape.ydot)
+                w_ = w(self.__shape.xdot, self.__shape.ydot,
+                       self.__shape.xddot, self.__shape.yddot)
+
+                u.linear.x = v_
+                u.angular.z = w_
+                self.__cmd_vel_pub.publish(u)
+
+                self.__t += 1 / self.__pub_freq
+                self.__rate .sleep()
+
+            else:
+                self.__cmd_vel_pub.publish(Twist())
+                self.__rate .sleep()
+
+
+def main():
+    """ The main() function. """
+    rospy.init_node('trajectory')
+    trajectory = Trajectory()
+    trajectory.loop()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass

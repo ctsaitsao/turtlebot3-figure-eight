@@ -1,0 +1,3 @@
+width: 0.5    # units: m
+height: 0.5   # units: m
+period: 30    # units: s
