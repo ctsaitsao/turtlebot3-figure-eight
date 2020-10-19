@@ -68,10 +68,10 @@ roslaunch homework2 arm_traj.launch
 - 2R arm configuration options:
     - Add the `display_markers:=False` option to not display the markers at the end-effector frame of the arm.
     - The 2R arm can be manually controlled (without a trajectory) by running:
-    ```Shell
-    roslaunch homework2 view_arm.launch launch_gui:=True
-    ```
-    This launch file is included in `arm_traj.launch`.
+        ```Shell
+        roslaunch homework2 view_arm.launch launch_gui:=True
+        ```
+      This launch file is included in `arm_traj.launch`.
 
 ## Calculations:
 
