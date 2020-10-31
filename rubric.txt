@@ -1,0 +1,52 @@
+17.5 (points off were relatively minor things, overall an excellent job, especially on the turtlebot trajectory following)
+Guidelines -0.25
+1. Multiple commits with meaningful commit messages
+2. No improperly tracked files in git
+   src/homework2/__pycache__ should not be in the repository
+3. README.md
+   - Title
+   - Name
+   - Overview
+   - Usage Instructions
+   - Configuration Instructions
+4. Nodes describe the python API
+5. Docstrings are used
+6. catkin_lint is clean
+7. ROS entities are relative within nodes (where appropriate)
+
+Part I 
+1. Pause service implemented
+2. Resume service implemented
+3. Publish cmd_vel at a fixed frequency
+4. Draw path in rviz
+5. Static tf is broadcast between world and odom
+6. width, height, and period parameters
+7. ~pub_freq parameter is private
+8. Python package setup correctly
+9. Compute the trajectory and derivatives in the python package
+10. rosunit tests run with catkin_make run_tests
+11. rosunit tests cover the appropriate methods
+12. figure_eight.launch loads parameters from trajectory.yaml
+13. figure_eight.launch sets the pub_freq parameter
+14. figure_eight.launch has option for running rqt_plot
+15. figure_eight.launch has option for launching gazebo
+16. figure_eight.launch has option for visualizing robot in rviz
+17. Documentation for your calculations
+18. Screencast and video
+
+
+Part II -0.25
+1. config/arm.yam is loaded by the xacro file
+2. The arm is in the xy plane in rviz
+3. Each link of the arm is a different color
+4. The basic launchfile starts the robot_state_publisher
+5. The basic launchfile optionally starts the joint_state_publisher_gui
+6. The basic launchfile optionally starts rviz
+7. The rviz configuration is loaded  by the launchfile
+8. arm_traj makes the node follow the desired trajectory
+9. arm_marker publishes markers
+10. The overall launchfile includes the basic launchfile from step 2
+11. The overall launchfile has an option to send markers to rviz
+12. The overall launchfile reads parameters from arm.yaml
+- The arm end-effector trajectory should be straight but there
+   is a slight curve to it for some reason
