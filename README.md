@@ -1,8 +1,8 @@
-# ME495 (Embedded Systems for Robotics) Homework 02:
+# ME495 (Embedded Systems for Robotics) Homework 2
 
 Author: Christopher Tsai
 
-## Overview:
+## Overview
 
 This package contains nodes that accomplish two tasks:
 
@@ -10,13 +10,13 @@ This package contains nodes that accomplish two tasks:
 
 2. Visualize a 2R arm that follows a trajectory where its y-position remains constant. 
 
-## Demos:
+## Demos
 
 Turtlebot RVIz: https://youtu.be/BLI5nBEQBdw  
 Turtlebot IRL: https://youtu.be/CagvXUCvS04  
 Arm RViz: https://youtu.be/47MknIazwUA  
 
-## Usage Instructions:
+## Usage Instructions
 
 1. Create a new workspace and clone this repositiory.
 ```Shell
@@ -58,7 +58,7 @@ catkin_make install
 roslaunch homework2 arm_traj.launch
 ```
 
-## Configuration Options:
+## Configuration Options
 
 - Turtlebot configuration options:
     - Add the `launch_gazebo:=True` option to run the turtlebot code in the Gazebo simulation.
@@ -73,6 +73,6 @@ roslaunch homework2 arm_traj.launch
         ```
       This launch file is included in `arm_traj.launch` and runs the `rviz`, `joint_state_publisher_gui`, and `robot_state_publisher` nodes.
 
-## Calculations:
+## Calculations
 
 Handwritten calculations for the turtlebot control velocity inputs v and w as well as the turtlebot's trajectory parametric equations can be found in the `doc` folder.
