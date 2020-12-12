@@ -6,7 +6,7 @@ Author: Christopher Tsai
 
 This package contains nodes that accomplish two tasks:
 
-1. Cause a turtlebot to follow a configurable figure 8 trajectory. One has the option to run this code in real-life or in a Gazebo simulation. Either way it is accompanied by an RViz visualization.
+1. Cause a TurtleBot to follow a configurable figure 8 trajectory. One has the option to run this code in real-life or in a Gazebo simulation. Either way it is accompanied by an RViz visualization.
 
 2. Visualize a 2R arm that follows a trajectory where its y-position remains constant. 
 
@@ -16,8 +16,8 @@ This package contains nodes that accomplish two tasks:
 
 ## Demos
 
-Turtlebot RVIz: https://youtu.be/BLI5nBEQBdw  
-Turtlebot IRL: https://youtu.be/CagvXUCvS04  
+TurtleBot RVIz: https://youtu.be/BLI5nBEQBdw  
+TurtleBot IRL: https://youtu.be/CagvXUCvS04  
 Arm RViz: https://youtu.be/47MknIazwUA  
 
 ## Usage Instructions
@@ -41,17 +41,17 @@ catkin_make install
 . devel/setup.bash
 ```
 
-3. To run the turtlebot code in real life, create these three terminals:
+3. To run the TurtleBot code in real life, create these three terminals:
     1. In the first one, create a ROS Master.
     ```Shell
     roscore
     ```
-    2. In the second one, SSH into a turtlebot machine and run the startup launch file.
+    2. In the second one, SSH into a TurtleBot machine and run the startup launch file.
     ```Shell
     ssh ubuntu@turtlebot.local
     roslaunch turtlebot3_bringup turtlebot3_robot.launch
     ```
-    3. In the third, export the turtlebot model (if this hasn't been done before) and run the main launch file.
+    3. In the third, export the TurtleBot model (if this hasn't been done before) and run the main launch file.
     ```Shell
     export TURTLEBOT3_MODEL=burger
     roslaunch homework2 figure_eight.launch
@@ -64,8 +64,8 @@ roslaunch homework2 arm_traj.launch
 
 ## Configuration Options
 
-- Turtlebot configuration options:
-    - Add the `launch_gazebo:=True` option to run the turtlebot code in the Gazebo simulation.
+- TurtleBot configuration options:
+    - Add the `launch_gazebo:=True` option to run the TurtleBot code in the Gazebo simulation.
     - Add the `launch_rqt_plot:=True` option to graph the x and y positions of the robot over time.
     - Add the `launch_rviz=False` option to not run RViz.
 
@@ -79,4 +79,4 @@ roslaunch homework2 arm_traj.launch
 
 ## Calculations
 
-Handwritten calculations for the turtlebot control velocity inputs v and w as well as the turtlebot's trajectory parametric equations can be found in the `doc` folder.
+Handwritten calculations for the TurtleBot control velocity inputs v and w as well as the TurtleBot's trajectory parametric equations can be found in the `doc` folder.
