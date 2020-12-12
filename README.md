@@ -10,6 +10,10 @@ This package contains nodes that accomplish two tasks:
 
 2. Visualize a 2R arm that follows a trajectory where its y-position remains constant. 
 
+## Dependencies
+
+- turtlebot3
+
 ## Demos
 
 Turtlebot RVIz: https://youtu.be/BLI5nBEQBdw  
