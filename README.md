@@ -1,6 +1,6 @@
-# ME495 (Embedded Systems for Robotics) Homework 2
+# TurtleBot3 Figure Eight ROS Package
 
-Author: Christopher Tsai
+Second assignment for ME 495: Embedded Systems in Robotics, Northwestern University, Fall 2020.
 
 ## Overview
 
@@ -29,7 +29,7 @@ mkdir -p ws/src
 
 # clone the demonstration code
 cd ws/src
-git clone https://github.com/ME495-EmbeddedSystems/homework02-ctsaitsao homework2
+git clone https://github.com/ME495-EmbeddedSystems/homework02-ctsaitsao turtlebot3_figure_eight
 
 # return to ws root
 cd ../
@@ -54,12 +54,12 @@ catkin_make install
     3. In the third, export the TurtleBot model (if this hasn't been done before) and run the main launch file.
     ```Shell
     export TURTLEBOT3_MODEL=burger
-    roslaunch homework2 figure_eight.launch
+    roslaunch turtlebot3_figure_eight figure_eight.launch
     ```
 
 4. The 2R arm code runs two main nodes, `arm_traj` (which commands the arm trajectory) and `arm_marker` (which draws markers at the end-effector of the arm). To run the 2R arm code, run:
 ```Shell
-roslaunch homework2 arm_traj.launch
+roslaunch turtlebot3_figure_eight arm_traj.launch
 ```
 
 ## Configuration Options
@@ -73,7 +73,7 @@ roslaunch homework2 arm_traj.launch
     - Add the `display_markers:=False` option to not display the markers at the end-effector frame of the arm.
     - The 2R arm can be manually controlled (without a trajectory) by running:
         ```Shell
-        roslaunch homework2 view_arm.launch launch_gui:=True
+        roslaunch turtlebot3_figure_eight view_arm.launch launch_gui:=True
         ```
       This launch file is included in `arm_traj.launch` and runs the `rviz`, `joint_state_publisher_gui`, and `robot_state_publisher` nodes.
 
